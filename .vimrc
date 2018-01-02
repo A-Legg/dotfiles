@@ -5,15 +5,18 @@ set nocompatible
 filetype off
 
 " TODO: Load plugins here (pathogen or vundle)
-
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'kien/ctrlp.vim'
+call vundle#end()
 " Turn on syntax highlighting
 syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
 
-" TODO: Pick a leader key
-" let mapleader = ","
+" Pick a leader key
+let mapleader = ","
 
 " Security
 set modelines=0

@@ -1,41 +1,16 @@
 set nocompatible
 filetype off
 
-<<<<<<< HEAD
-" TODO: Load plugins here (pathogen or vundle)
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'kien/ctrlp.vim'
 call vundle#end()
 " Turn on syntax highlighting
 =======
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" Load plugins here (pathogen or vundle)
-"
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'slashmili/alchemist.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'pangloss/vim-javascript'
-Plugin 'ElmCast/elm-vim'
-call vundle#end()
-
-let mapleader = "SPC"
->>>>>>> changed some shit
-syntax on
-filetype plugin indent on
-<<<<<<< HEAD
-
 " Pick a leader key
 let mapleader = ","
 
 " Security
-=======
->>>>>>> changed some shit
 set modelines=0
 set number
 set ruler

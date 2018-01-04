@@ -1,35 +1,46 @@
-" Don't try to be vi compatible
 set nocompatible
-
-" Helps force plugins to load correctly when it is turned back on below
 filetype off
 
+<<<<<<< HEAD
 " TODO: Load plugins here (pathogen or vundle)
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'kien/ctrlp.vim'
 call vundle#end()
 " Turn on syntax highlighting
-syntax on
+=======
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" Load plugins here (pathogen or vundle)
+"
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'slashmili/alchemist.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-surround'
+Plugin 'kien/ctrlp.vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ElmCast/elm-vim'
+call vundle#end()
 
-" For plugins to load correctly
+let mapleader = "SPC"
+>>>>>>> changed some shit
+syntax on
 filetype plugin indent on
+<<<<<<< HEAD
 
 " Pick a leader key
 let mapleader = ","
 
 " Security
+=======
+>>>>>>> changed some shit
 set modelines=0
-
-" Show line numbers
 set number
-
-" Show file stats
 set ruler
-
-" Blink cursor on error instead of beeping (grr)
 set visualbell
-
+set cursorline "Highlights current line under cursor
 " Encoding
 set encoding=utf-8
 
@@ -53,6 +64,15 @@ runtime! macros/matchit.vim
 nnoremap j gj
 nnoremap k gk
 
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
+nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
+
 " Allow hidden buffers
 set hidden
 
@@ -74,15 +94,36 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader><space> :let @/=''<cr> " clear search
 
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-" Textmate holdouts
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
-" Formatting
-map <leader>q gqip
+" Tab completion
+" will insert tab at beginning of line, will use completion if not at beginning
+set wildmode=list:longest,list:full
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
+" This removes trailing whitespaces on save
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()

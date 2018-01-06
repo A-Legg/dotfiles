@@ -5,8 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'kien/ctrlp.vim'
 call vundle#end()
-" Turn on syntax highlighting
-=======
 " Pick a leader key
 let mapleader = ","
 

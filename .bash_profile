@@ -19,7 +19,4 @@ do
   source $file
 done
 
-alias vi="nvim"
-alias vim="nvim"
-
 source ~/.bashrc

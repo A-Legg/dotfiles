@@ -13,3 +13,5 @@ alias g='git'                               # g: git -> g
 alias rmd='rm -rf'
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
+
+source /usr/local/share/chruby/chruby.sh
